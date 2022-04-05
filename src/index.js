@@ -5,9 +5,12 @@ import './index.css';
 class AddTask extends React.Component {
 	render() {
 		return (
-			<div>
-				Add a task
-			</div>
+			<>
+			<form>
+				<input type="text"></input>
+				<input type="button" value="Add Task"></input>
+			</form>
+			</>
 		);
 	}
 }
@@ -15,7 +18,7 @@ class AddTask extends React.Component {
 class TaskList extends React.Component {
 	render() {
 		return (
-			<div>{this.props.purpose}</div>
+			<div className={this.props.forStyling}>{this.props.purpose}</div>
 		);
 	}
 }
@@ -23,14 +26,14 @@ class TaskList extends React.Component {
 class App extends React.Component {
 
 	render() {
-		const name = "Ganesh";
 		return (
-			<div>
-				<h1>Hello, {name}</h1>
-				<div><AddTask/></div>
-				<div><TaskList purpose="Task to do"/></div>
-				<div><TaskList purpose="Finished Tasks"/></div>
-			</div>
+			<>
+				<div className='add-task'><AddTask /></div>
+				<div className='task-lists'>
+					<TaskList purpose="Task to do" forStyling="todo"/>
+					<TaskList purpose="Finished Tasks" forStyling="finished"/>
+				</div>
+			</>
 		);
 	}
 }
