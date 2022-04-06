@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+// import 
 class AddTask extends React.Component {
 	// constructor(props) {
 	// 	super(props);
@@ -24,19 +24,34 @@ class TaskList extends React.Component {
 	}
 	render() {
 		let list = [];
-		
+
 		for (let i = 0; i < this.props.tasks.length; i++) {
 			let task = this.props.tasks[i];
-			let li = (<li key={i}>{task.desc}</li>);
+			let spanAction;
+			if (task.isfinished) {
+				spanAction = (<span class="material-icons">undo</span>)
+			} else {
+				spanAction = (<span class="material-icons">check_circle_outline</span>)
+			}
+			let li = (<div key={i}>
+				<span>{task.desc}</span>
+				{/* <button>{this.props.purpose === "TODO" ? "do" : "undo"}</button> 
+				    <span class="material-icons">check</span>
+					<span class="material-icons">check_circle_outline</span>
+					<span class="material-icons">undo</span> 
+				*/}
+				{spanAction}
+			</div>);
 			list.push(li);
 		}
-		console.log(list);
 		return (
 			<div className={this.props.forStyling}>
-				<div>{this.props.purpose}</div>
-				<ul>
-					{list}
-				</ul>
+				<div className='list-container'>
+					<div className='title'>{this.props.purpose}</div>
+					<div className='content'>
+						{list}
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -71,8 +86,8 @@ class App extends React.Component {
 			<>
 				<div className='add-task'><AddTask /></div>
 				<div className='task-lists'>
-					<TaskList tasks={todo} purpose="Task to do" forStyling="todo" />
-					<TaskList tasks={finished} purpose="Finished Tasks" forStyling="finished" />
+					<TaskList tasks={todo} purpose="TODO" forStyling="todo" />
+					<TaskList tasks={finished} purpose="FINISHED" forStyling="finished" />
 				</div>
 			</>
 		);
